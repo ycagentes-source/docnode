@@ -1,0 +1,109 @@
+{
+  "theme_strategy": {
+    "theme": "light",
+    "archetype": "Organic & Earthy / Trust",
+    "description": "Uma direção visual moderna, limpa, premium, confiável e segura. O design foca no público familiar (pessoas não técnicas), com espaçamento generoso, cantos arredondados e estética SaaS acessível. Uso predominante de branco para transmitir clareza e organização."
+  },
+  "colors": {
+    "brand": {
+      "primary": "#0FB5BB",
+      "primary_light": "#348E91",
+      "primary_dark": "#004447",
+      "background_app": "#F2F2F2",
+      "background_card": "#FFFFFF",
+      "text_primary": "#0A0C0D",
+      "text_secondary": "#4B5563",
+      "border": "#E5E7EB"
+    },
+    "status": {
+      "active": "#0FB5BB",
+      "expiring_soon": "#F59E0B",
+      "expired": "#EF4444",
+      "no_expiration": "#9CA3AF"
+    }
+  },
+  "typography": {
+    "families": {
+      "heading": "Plus Jakarta Sans",
+      "body": "Poppins"
+    },
+    "scale": {
+      "h1": { "size": "32px", "weight": "bold", "tracking": "tight" },
+      "h2": { "size": "24px", "weight": "600" },
+      "h3": { "size": "20px", "weight": "500" },
+      "body_lg": { "size": "16px", "weight": "400" },
+      "body": { "size": "14px", "weight": "400" },
+      "caption": { "size": "12px", "weight": "400" }
+    }
+  },
+  "layout_and_spacing": {
+    "spacing_scale": "Padrão mobile-first. Margens de tela: 16px ou 24px. Espaçamento entre seções: 24px ou 32px.",
+    "border_radius": "16px para cards principais e botões grandes. 24px para modais/bottom sheets. 8px para badges e inputs.",
+    "shadows": "Sombras suaves e amplas para cards: 0px 4px 16px rgba(0,0,0, 0.04).",
+    "cards": "Fundo branco (#FFFFFF) sobre fundo do app (#F2F2F2) para separação visual sem bordas pesadas."
+  },
+  "iconography": {
+    "library": "@expo/vector-icons",
+    "style": "Feather ou Ionicons (peso fino/regular). Ícones discretos para não poluir a interface. Sem uso de emojis."
+  },
+  "navigation": {
+    "bottom_tabs": [
+      { "name": "Início", "icon": "home" },
+      { "name": "Documentos", "icon": "file-text" },
+      { "name": "Vencimentos", "icon": "clock" },
+      { "name": "Família", "icon": "users" },
+      { "name": "Ajustes", "icon": "settings" }
+    ],
+    "header": "Simples e limpo, título grande alinhado à esquerda ou centro, fundo transparente ou combinando com o app."
+  },
+  "animations": {
+    "library": "react-native-reanimated",
+    "usage": "Transições suaves de tela (Fade/Slide), feedback tátil em botões (escala para 0.98 no press), e animações de entrada para empty states."
+  },
+  "branding": {
+    "primary_logo": "Docnode (Tipografia principal ou símbolo turquesa em fundo claro)",
+    "discrete_tag": "Docnode by Keynode",
+    "placement": "Marca Keynode aplicada de forma muito discreta (rodapé do Login, tela Sobre, aba Configurações)."
+  },
+  "image_urls": {
+    "onboarding_hero": {
+      "url": "https://images.pexels.com/photos/27175805/pexels-photo-27175805.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "description": "Mãe e filhos compartilhando um momento caloroso, representando confiança familiar e segurança."
+    },
+    "empty_state_documents": {
+      "url": "https://images.unsplash.com/photo-1723754166046-6d55777d54d0?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxODd8MHwxfHNlYXJjaHwxfHxlbXB0eSUyMGZvbGRlciUyMG9yZ2FuaXplZCUyMGRlc2t8ZW58MHx8fHwxNzc3MjAyMzI5fDA&ixlib=rb-4.1.0&q=85",
+      "description": "Mesa limpa e organizada com cadernos, ideal para o empty state de documentos ou busca sem resultados."
+    }
+  },
+  "screens": {
+    "Login_Signup": {
+      "layout": "Logo 'Docnode' em destaque. Formulário simples de login/cadastro. Botão primário grande. Link de recuperação de senha. No rodapé absoluto, a assinatura discreta 'Docnode by Keynode'.",
+      "components": "Inputs arredondados (16px) com fundo #FFFFFF e borda #E5E7EB. Botão com fundo #0FB5BB."
+    },
+    "Dashboard": {
+      "layout": "Saudação (ex: 'Olá, Família Silva'). Row de resumo com contadores (Cadastrados, Vencidos, Vencendo). Busca rápida. Lista horizontal de 'Próximos Vencimentos'. Dois botões proeminentes e fáceis de clicar: 'Adicionar documento' e 'Adicionar familiar'.",
+      "components": "Cards de contadores com iconografia clara. Badges de status coloridos."
+    },
+    "Family_List": {
+      "layout": "Lista de familiares em formato de cards grandes. Cada card exibe avatar (foto/iniciais), Nome, Parentesco e contagem de documentos. Botão FAB no canto inferior para 'Adicionar familiar'.",
+      "components": "Cards de lista (Row), Avatar redondo, Badge de contagem."
+    },
+    "Document_List": {
+      "layout": "Busca no topo com filtros horizontais em chips (Todos, Vencendo, Ativos). Lista de documentos exibindo ícone/thumbnail, Nome do Documento, Familiar vinculado, Data e Badge de Status.",
+      "components": "Chips de filtro arredondados. Cards de documento com forte hierarquia tipográfica."
+    },
+    "Document_Detail": {
+      "layout": "Header com o nome do documento. Área de preview do PDF/Imagem com cantos arredondados. Metadados listados claramente (Data emissão, Data vencimento, Familiar, Status, Observações). Barra inferior com ações: Editar, Baixar, Compartilhar, Excluir.",
+      "components": "Linhas de metadados divididas por borda sutil. Botão de Excluir em texto/ícone vermelho (#EF4444) após confirmação (Modal)."
+    },
+    "Expirations": {
+      "layout": "Lista agrupada por seções de tempo: 'Vencidos' (destaque vermelho), 'Próximos 7 dias' (destaque âmbar), 'Próximos 30 dias', 'Depois'.",
+      "components": "Cabeçalhos de seção em tipografia h3. Cards de documento focados na data de vencimento."
+    },
+    "Settings": {
+      "layout": "Resumo do perfil no topo. Lista de configurações: Alterar senha, Notificações, Sobre Docnode, Termos de uso, Excluir conta. Rodapé com versão do app e 'Docnode by Keynode'.",
+      "components": "Rows clicáveis com chevron direito. Botões para ações destrutivas usam tons de vermelho e exigem confirmação."
+    }
+  },
+  "instructions_to_main_agent": "Utilize as fontes do Google Fonts via @expo-google-fonts (Poppins e Plus Jakarta Sans). O app é Expo React Native (hybrid_fullstack), aplique estilos via Nativewind ou StyleSheet respeitando estritamente os tokens de cor e tipografia descritos. Para animações, importe o react-native-reanimated. Certifique-se de tratar todos os empty states com imagens amigáveis e aplique CRITICAMENTE a propriedade 'data-testid' (no padrão kebab-case com base no role) em TODOS os botões, inputs, abas e itens clicáveis para facilitar os testes automatizados."
+}
