@@ -1,0 +1,43 @@
+{
+  "summary": "Comprehensive backend + frontend testing for Docnode MVP. 33/33 backend pytest cases pass after fixing one MongoDB datetime tz bug in /api/auth/reset-password. Frontend login → dashboard → all 5 tabs (Início, Documentos, Vencimentos, Família, Ajustes) → 'Novo familiar' form all render and navigate correctly with proper testIDs and pt-BR copy.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "POST /api/auth/reset-password", "issue": "Was returning 500 due to TypeError: can't compare offset-naive and offset-aware datetimes (Mongo strips tz on read). Fixed by treating retrieved expires_at as UTC if naive."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "global", "issues": ["React Native Web warning: 'shadow*' style props are deprecated, use 'boxShadow' (cosmetic console noise, not blocking)."]}
+    ],
+    "react_native_issues": [
+      {"component": "global", "issue": "Console warning: useNativeDriver not supported on web (expected on Expo web preview, not blocking)."}
+    ]
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_docnode_api.py",
+    "/app/test_reports/pytest/pytest_results.xml"
+  ],
+  "action_items": [
+    "Optional: replace shadow* style props with boxShadow to silence RN Web deprecation warnings.",
+    "Optional: align Expo SDK package versions per warning (expo-document-picker, expo-file-system, expo-image-picker, expo-secure-store, expo-sharing) to recommended ranges to avoid future incompatibilities."
+  ],
+  "critical_code_review_comments": [
+    "Mongo datetime values are stored as tz-aware but returned naive; the reset-password code compared a naive datetime to tz-aware now_utc(). Same pattern could affect any future code reading datetime fields back from Mongo - consider a small helper to normalize.",
+    "CORS is set to allow_origins=['*'] with allow_credentials=False; cookie auth from a cross-origin web client won't work. Mobile app uses Bearer headers so OK for MVP, but note for future web deployment.",
+    "Login attempt lockout logic in server.py increments count and only sets locked_until on the 5th attempt - works, but resets locked_until to None on attempts 1-4 which is fine for current behavior.",
+    "/api/documentos list builds in-memory filter (status_filter + q against familiar_nome) after Mongo query - acceptable for MVP scale; document for future."
+  ],
+  "updated_files": [
+    "/app/backend/server.py (reset_password datetime tz fix)",
+    "/app/backend/tests/test_docnode_api.py (new comprehensive pytest suite)"
+  ],
+  "success_rate": {"backend": "100% (33/33)", "frontend": "100% on flows tested (login, all 5 tabs, family form rendering)"},
+  "seed_data_creation": "Tests register ephemeral users prefixed TEST_; one test deletes its own account at the end to verify cascade. No persistent test data left aside from a few TEST_ users used during the run.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Backend test suite at /app/backend/tests/test_docnode_api.py is the canonical regression suite. Run: `pytest /app/backend/tests/test_docnode_api.py -v`. Uses EXPO_PUBLIC_BACKEND_URL. Admin creds admin@docnode.com/admin123 are seeded on startup. Frontend testIDs verified: login-email-input, login-password-input, login-submit-button, dashboard-username, stat-*, dashboard-add-document, dashboard-add-family, famform-* on the family form. Form submit + document creation UI flow not exercised end-to-end via Playwright (only rendering verified) - main agent or next iteration can submit a familiar via UI to round out coverage.",
+  "rca_of_issue": "Bug: POST /api/auth/reset-password 500. RCA: PyMongo/Motor returns datetime objects without tzinfo even when inserted with tz-aware values. Comparison `rec['expires_at'] < now_utc()` raised TypeError. Fix applied in server.py lines ~430-438: normalize expires_at to UTC if naive before comparing. Verified by re-running TestAuth.test_forgot_and_reset_password (now passing)."
+}
